@@ -82,7 +82,7 @@ public class TocFinal
 
                     if (!pair.containsKey(allkey)) 
                     {
-                        pair.put(allkey, 0);
+                        pair.put(allkey, 1);
                     }
                     else
                     {
@@ -90,24 +90,30 @@ public class TocFinal
                     }
                 }
             }
+        }
 
-            Collections.sort(pair, new Comparator<Map.Entry<String, Integer>>()
-            {
-                public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2)
-                {
-                    return (entry2.getValue() - entry1.getValue());
-                }
-            });
 
-            for (Map.Entry<String, Integer> entry:list_Data) 
+        List<Map.Entry<String, Integer>> list_Data = new ArrayList<Map.Entry<String, Integer>>(pair.entrySet());
+
+        Collections.sort(list_Data, new Comparator<Map.Entry<String, Integer>>()
+        {
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2)
             {
-                printGrade(entry.getKey());
+                return (entry2.getValue() - entry1.getValue());
             }
+        });
+
+        int i = 0;
+        for (Map.Entry<String, Integer> entry : list_Data) 
+        {
+            if (i++ == 3) break;
+            System.out.println(entry.getKey() + "::::" + entry.getValue());
+        }
+
+            //System.out.println(list_Data);
 
             /*for (String key : pair.keySet()) 
                 System.out.println(key + ":::" + pair.get(key));*/
-
-        }
 
 
     }
