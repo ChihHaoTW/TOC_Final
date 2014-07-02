@@ -52,11 +52,15 @@ public class TocFinal
             System.out.println(key + " " + ary.getJSONObject(0).get(key).toString());
         }*/
 
-        //for(int i = 0; i < ary.length(); i++)
-        //{
+        JSONObject jobj;
+
+        for(int i = 0; i < ary.length(); i++)
+        {
+            jobj = ary.getJSONObject(i);
+
             Iterator<String> key1 = ary.getJSONObject(0).keys();
             Iterator<String> key2 = ary.getJSONObject(0).keys();
-            String skey1, skey2;
+            String skey1, skey2, allkey;
             int j = 0;
 
             while(key1.hasNext())
@@ -64,7 +68,7 @@ public class TocFinal
                 key2 = ary.getJSONObject(0).keys();
                 //key2 = key1;
                 skey1 = (String)key1.next();
-                skey1 += ":" + ary.getJSONObject(0).get(skey1);
+                skey1 += ":" + jobj.get(skey1);
                 for(int k = 0; k <= j; k++)
                     key2.next();
                 j++;
@@ -72,12 +76,25 @@ public class TocFinal
                 while(key2.hasNext()) 
                 {
                     skey2 = key2.next();
-                    skey2 += ":" + ary.getJSONObject(0).get(skey2);
-                    System.out.println(skey1 + " " + skey2);
+                    skey2 += ":" + jobj.get(skey2);
+                    allkey = skey1 + "@" + skey2;
+                    //System.out.println(skey1 + " " + skey2);
+
+                    if (!pair.containsKey(allkey)) 
+                    {
+                        pair.put(allkey, 0);
+                    }
+                    else
+                    {
+                        pair.put(allkey, pair.get(allkey) + 1);
+                    }
                 }
-                
             }
-        //}
+
+            for (String key : pair.keySet()) 
+                System.out.println(key + ":::" + pair.get(key));
+
+        }
 
 
     }
