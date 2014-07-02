@@ -54,22 +54,25 @@ public class TocFinal
 
         //for(int i = 0; i < ary.length(); i++)
         //{
-            Iterator keys = ary.getJSONObject(0).keys();
-            Iterator key1 = keys, key2;
+            Iterator<String> key1 = ary.getJSONObject(0).keys();
+            Iterator<String> key2 = ary.getJSONObject(0).keys();
             String skey1, skey2;
+            int j = 0;
 
             while(key1.hasNext())
             {
-                key2 = key1;
+                key2 = ary.getJSONObject(0).keys();
+                //key2 = key1;
                 skey1 = (String)key1.next();
+                for(int k = 0; k <= j; k++)
+                    key2.next();
+                j++;
 
                 while(key2.hasNext()) 
                 {
-                    skey2 = (String)key2.next();
-                    //System.out.println(skey1 + " " + skey2);
+                    skey2 = key2.next();
+                    System.out.println(skey1 + " " + skey2);
                 }
-
-                System.out.println("!!!!!");
                 
             }
         //}
