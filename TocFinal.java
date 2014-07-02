@@ -91,8 +91,21 @@ public class TocFinal
                 }
             }
 
-            for (String key : pair.keySet()) 
-                System.out.println(key + ":::" + pair.get(key));
+            Collections.sort(pair, new Comparator<Map.Entry<String, Integer>>()
+            {
+                public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2)
+                {
+                    return (entry2.getValue() - entry1.getValue());
+                }
+            });
+
+            for (Map.Entry<String, Integer> entry:list_Data) 
+            {
+                printGrade(entry.getKey());
+            }
+
+            /*for (String key : pair.keySet()) 
+                System.out.println(key + ":::" + pair.get(key));*/
 
         }
 
