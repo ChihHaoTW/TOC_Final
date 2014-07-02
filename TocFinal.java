@@ -64,6 +64,7 @@ public class TocFinal
                 key2 = ary.getJSONObject(0).keys();
                 //key2 = key1;
                 skey1 = (String)key1.next();
+                skey1 += ":" + ary.getJSONObject(0).get(skey1);
                 for(int k = 0; k <= j; k++)
                     key2.next();
                 j++;
@@ -71,6 +72,7 @@ public class TocFinal
                 while(key2.hasNext()) 
                 {
                     skey2 = key2.next();
+                    skey2 += ":" + ary.getJSONObject(0).get(skey2);
                     System.out.println(skey1 + " " + skey2);
                 }
                 
