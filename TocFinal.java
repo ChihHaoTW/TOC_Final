@@ -73,7 +73,7 @@ public class TocFinal
         Iterator<String> key1, key2, key3, key4;
         String skey1, skey2, skey3, skey4, allkey = "";
 
-        int L = 2, K = 501;
+        int L = 2, K = 500;
 
         for(int i = 0; i < ary.length(); i++)
         {
@@ -248,7 +248,7 @@ public class TocFinal
             }
         });
 
-        int i = 0, index, compare;
+        int i = 0, index, compare = 0;
         String sort_allkey;
         FileWriter fw = new FileWriter("output.txt");
         for (Map.Entry<String, Integer> entry : list_Data) 
