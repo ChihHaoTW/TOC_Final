@@ -59,7 +59,7 @@ public class TocFinal
         for(int i = 0; i < 1; i++)
         {
             jobj = ary.getJSONObject(i);
-            int L = 4;
+            int L = 3;
 
             switch(L)
             {
@@ -211,7 +211,10 @@ public class TocFinal
                             }
                         }
                     }
-                    break;                    
+                    break;   
+
+                default:
+                   break;                  
 
             }
         }
@@ -231,7 +234,7 @@ public class TocFinal
         for (Map.Entry<String, Integer> entry : list_Data) 
         {
             if (i++ == 3) break;
-            //System.out.println(entry.getKey() + "::::" + entry.getValue());
+            System.out.println(entry.getKey() + "::::" + entry.getValue());
         }
 
             //System.out.println(list_Data);
