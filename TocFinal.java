@@ -40,7 +40,8 @@ public class TocFinal
         //int com = 2;
         Map<String, Integer> pair = new HashMap<String, Integer>();
 
-        String text = read("http://www.datagarage.io/api/5386c065e7259bb37d9270e5");
+        //String text = read("http://www.datagarage.io/api/5386c065e7259bb37d9270e5");
+        String text = read(args[0]);
 
         JSONArray ary = new JSONArray(text);
 
@@ -73,7 +74,7 @@ public class TocFinal
         Iterator<String> key1, key2, key3, key4;
         String skey1, skey2, skey3, skey4, allkey = "";
 
-        int L = 2, K = 500;
+        int L = Integer.parseInt(args[2]), K = Integer.parseInt(args[1]);
 
         for(int i = 0; i < ary.length(); i++)
         {
