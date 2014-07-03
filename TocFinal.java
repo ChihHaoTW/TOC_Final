@@ -53,42 +53,104 @@ public class TocFinal
         }*/
 
         JSONObject jobj;
+        Iterator<String> key1, key2, key3, key4;
+        String skey1, skey2, skey3, skey4, allkey;
 
-        for(int i = 0; i < ary.length(); i++)
+        for(int i = 0; i < 1; i++)
         {
             jobj = ary.getJSONObject(i);
+            int L = 3;
 
-            Iterator<String> key1 = ary.getJSONObject(0).keys();
-            Iterator<String> key2 = ary.getJSONObject(0).keys();
-            String skey1, skey2, allkey;
-            int j = 0;
-
-            while(key1.hasNext())
+            switch(L)
             {
-                key2 = ary.getJSONObject(0).keys();
-                //key2 = key1;
-                skey1 = (String)key1.next();
-                skey1 += ":" + jobj.get(skey1);
-                for(int k = 0; k <= j; k++)
-                    key2.next();
-                j++;
+                case 2:
+                    key1 = jobj.keys();
+                    key2 = jobj.keys();
+                    
+                    int j = 0;
 
-                while(key2.hasNext()) 
-                {
-                    skey2 = key2.next();
-                    skey2 += ":" + jobj.get(skey2);
-                    allkey = skey1 + "@" + skey2;
-                    //System.out.println(skey1 + " " + skey2);
+                    while(key1.hasNext())
+                    {
+                        key2 = jobj.keys();
+                        //key2 = key1;
+                        skey1 = (String)key1.next();
+                        skey1 += ":" + jobj.get(skey1);
+                        for(int k = 0; k <= j; k++)
+                            key2.next();
+                        j++;
 
-                    if (!pair.containsKey(allkey)) 
-                    {
-                        pair.put(allkey, 1);
+                        while(key2.hasNext()) 
+                        {
+                            skey2 = key2.next();
+                            skey2 += ":" + jobj.get(skey2);
+                            allkey = skey1 + "@" + skey2;
+                            System.out.println(allkey);
+
+                            if (!pair.containsKey(allkey)) 
+                            {
+                                pair.put(allkey, 1);
+                            }
+                            else
+                            {
+                                pair.put(allkey, pair.get(allkey) + 1);
+                            }
+                        }
                     }
-                    else
+                    break;
+
+                case 3:
+                    key1 = jobj.keys();
+                    key2 = jobj.keys();
+                    key3 = jobj.keys();
+
+                    int jj = 0, l = 0, n = 0;
+
+                    while(key1.hasNext())
                     {
-                        pair.put(allkey, pair.get(allkey) + 1);
+                        key2 = jobj.keys();
+                        
+                        //key2 = key1;
+                        skey1 = (String)key1.next();
+                        skey1 += ":" + jobj.get(skey1);
+                        for(int k = 0; k <= jj; k++)
+                            key2.next();
+
+                        jj++;
+                        n = 0;
+
+                        while(key2.hasNext()) 
+                        {
+                            key3 = jobj.keys();
+
+                            skey2 = key2.next();
+                            skey2 += ":" + jobj.get(skey2);
+                            allkey = skey1 + "@" + skey2;
+                            //System.out.println(skey1 + " " + skey2);
+                            for(int k = 0; k <= n + jj; k++)
+                                key3.next();
+                            n++;
+
+                            while(key3.hasNext()) 
+                            {
+                                skey3 = key3.next();
+                                skey3 += ":" + jobj.get(skey3);
+                                allkey = skey1 + "@" + skey2 + "@" + skey3;
+
+                                System.out.println(allkey);
+
+                                if (!pair.containsKey(allkey)) 
+                                {
+                                    pair.put(allkey, 1);
+                                }
+                                else
+                                {
+                                    pair.put(allkey, pair.get(allkey) + 1);
+                                }
+                            }
+                        }
                     }
-                }
+                    break;
+
             }
         }
 
@@ -107,7 +169,7 @@ public class TocFinal
         for (Map.Entry<String, Integer> entry : list_Data) 
         {
             if (i++ == 3) break;
-            System.out.println(entry.getKey() + "::::" + entry.getValue());
+            //System.out.println(entry.getKey() + "::::" + entry.getValue());
         }
 
             //System.out.println(list_Data);
