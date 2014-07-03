@@ -73,6 +73,7 @@ public class TocFinal
         JSONObject jobj;
         Iterator<String> key1, key2, key3, key4;
         String skey1, skey2, skey3, skey4, allkey = "";
+        boolean check = false;
 
         int L = Integer.parseInt(args[2]), K = Integer.parseInt(args[1]);
 
@@ -104,6 +105,8 @@ public class TocFinal
                             allkey = skey1 + "@" + skey2;
                             //System.out.println(allkey);
 
+                            if(allkey.contains(":,") || allkey.contains(":}"))
+                                continue;
                             if (!pair.containsKey(allkey)) 
                             {
                                 pair.put(allkey, 1);
@@ -153,6 +156,8 @@ public class TocFinal
                                 allkey = skey1 + "@" + skey2 + "@" + skey3;
 
                                 //System.out.println(allkey);
+                                if(allkey.contains(":,") || allkey.contains(":}"))
+                                    continue;
 
                                 if (!pair.containsKey(allkey)) 
                                 {
@@ -217,7 +222,9 @@ public class TocFinal
                                     allkey = skey1 + "@" + skey2 + "@" + skey3 + "@" + skey4;
 
                                     //System.out.println(allkey);
-
+                                    if(allkey.contains(":,") || allkey.contains(":}"))
+                                        continue;
+                                    
                                     if (!pair.containsKey(allkey)) 
                                     {
                                         pair.put(allkey, 1);
