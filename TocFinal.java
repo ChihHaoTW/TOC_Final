@@ -248,12 +248,16 @@ public class TocFinal
             }
         });
 
-        int i = 0, index;
+        int i = 0, index, compare;
         String sort_allkey;
         FileWriter fw = new FileWriter("output.txt");
         for (Map.Entry<String, Integer> entry : list_Data) 
         {
-            if (i++ == K) break;
+            if (i++ >= K) 
+            {
+                if(compare != entry.getValue())
+                    break;
+            }
             sort_allkey = "";
             allkey = entry.getKey();
 
@@ -276,6 +280,7 @@ public class TocFinal
             sort_allkey = sort_allkey.substring(0, sort_allkey.length()-1) + ";" + entry.getValue();
             //System.out.println(sort_allkey);
             fw.write(sort_allkey + '\n');
+            compare = entry.getValue();
         }
 
         fw.flush();
