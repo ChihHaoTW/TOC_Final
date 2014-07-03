@@ -28,4 +28,4 @@ build:
 	ant -buildfile /home/TOC/ANT/final/build.xml build -Darg $(SCHNUM)
 
 clean:
-	$(RM) *.class
+	$(RM) *.class $(MAIN).jar
