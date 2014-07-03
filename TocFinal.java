@@ -36,11 +36,18 @@ public class TocFinal
 
     public static void main(String args[]) throws IOException
     {
-        long time1, time2, time3;
+        //long time1, time2, time3;
         //int com = 2;
         Map<String, Integer> pair = new HashMap<String, Integer>();
 
-        String text = new String(Files.readAllBytes(Paths.get("5386c065e7259bb37d9270e5")), StandardCharsets.UTF_8);
+        //String text = new String(Files.readAllBytes(Paths.get("5386c065e7259bb37d9270e5")), StandardCharsets.UTF_8);
+
+        URL url = new URL("http://www.datagarage.io/api/5386c065e7259bb37d9270e5");
+        URLConnection connection = url.openConnection();
+        connection.setDoInput(true);
+        InputStream inStream = connection.getInputStream();
+        
+        //BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
 
         JSONArray ary = new JSONArray(text);
 
