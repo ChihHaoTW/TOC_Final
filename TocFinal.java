@@ -10,7 +10,7 @@ import java.lang.System.*;
 
 public class TocFinal
 {
-    public static String read(String urlStr) throws IOException 
+    public static String read() throws IOException 
     {  
         //URL url = new URL(urlStr);
         //URLConnection connection = url.openConnection();
@@ -26,7 +26,8 @@ public class TocFinal
         while ((s = in.readLine()) != null)  
         {
             //URLEncoder.encode(s, "UTF-8");
-            sb.append(s + "\n");
+            //sb.append(s + "\n");
+            System.out.println(s);
         }
 
         in.close();  
@@ -36,13 +37,29 @@ public class TocFinal
     public static void main(String args[]) throws IOException
     {
         long time1, time2, time3;
-        int com = 2;
+        //int com = 2;
         Map<String, Integer> pair = new HashMap<String, Integer>();
 
         String text = new String(Files.readAllBytes(Paths.get("5386c065e7259bb37d9270e5")), StandardCharsets.UTF_8);
+
         JSONArray ary = new JSONArray(text);
 
         int jlength = ary.getJSONObject(0).length();
+
+        String[] key_order = new String[jlength];
+
+        int first = text.indexOf('{');
+        int last = text.indexOf('}');
+
+        int it = 0;
+        //System.out.println(text.substring(first + 2, text.indexOf(':') - 1));
+        key_order[it++] = text.substring(first + 2, text.indexOf(':') - 1);
+        for (int cur = text.indexOf(',', first); cur <= last; ) 
+        {
+            //System.out.println(text.substring(cur + 2, text.indexOf(':', cur) - 1));
+            key_order[it++] = text.substring(cur + 2, text.indexOf(':', cur) - 1);
+            cur = text.indexOf(',', cur + 1);
+        }
 
         /*Iterator keys = ary.getJSONObject(0).keys();
 
@@ -54,12 +71,13 @@ public class TocFinal
 
         JSONObject jobj;
         Iterator<String> key1, key2, key3, key4;
-        String skey1, skey2, skey3, skey4, allkey;
+        String skey1, skey2, skey3, skey4, allkey = "";
 
-        for(int i = 0; i < 1; i++)
+        int L = 4, K = 2;
+
+        for(int i = 0; i < ary.length(); i++)
         {
             jobj = ary.getJSONObject(i);
-            int L = 3;
 
             switch(L)
             {
@@ -83,7 +101,7 @@ public class TocFinal
                             skey2 = key2.next();
                             skey2 += ":" + jobj.get(skey2);
                             allkey = skey1 + "@" + skey2;
-                            System.out.println(allkey);
+                            //System.out.println(allkey);
 
                             if (!pair.containsKey(allkey)) 
                             {
@@ -133,7 +151,7 @@ public class TocFinal
                                 skey3 += ":" + jobj.get(skey3);
                                 allkey = skey1 + "@" + skey2 + "@" + skey3;
 
-                                System.out.println(allkey);
+                                //System.out.println(allkey);
 
                                 if (!pair.containsKey(allkey)) 
                                 {
@@ -197,7 +215,7 @@ public class TocFinal
                                     skey4 += ":" + jobj.get(skey4);
                                     allkey = skey1 + "@" + skey2 + "@" + skey3 + "@" + skey4;
 
-                                    System.out.println(allkey);
+                                    //System.out.println(allkey);
 
                                     if (!pair.containsKey(allkey)) 
                                     {
@@ -230,11 +248,38 @@ public class TocFinal
             }
         });
 
-        int i = 0;
+        int i = 0, index;
+        String sort_allkey;
         for (Map.Entry<String, Integer> entry : list_Data) 
         {
             if (i++ == 3) break;
-            System.out.println(entry.getKey() + "::::" + entry.getValue());
+            sort_allkey = "";
+            allkey = entry.getKey();
+
+            for (int ii = 0; ii < jlength; ii++)
+            {
+                if (allkey.contains(key_order[ii]))
+                {
+                    index = allkey.indexOf(key_order[ii]);
+                    if(allkey.indexOf("@", index) == -1)
+                        //System.out.println(allkey.substring(index));
+                        sort_allkey += allkey.substring(index) + ",";
+                    else
+                        //System.out.println(allkey.substring(index, allkey.indexOf("@", index)));
+                        sort_allkey += allkey.substring(index, allkey.indexOf("@", index)) + ",";
+                }
+                else
+                    continue;
+            }
+
+            sort_allkey = sort_allkey.substring(0, sort_allkey.length()-1) + ";" + entry.getValue();
+            System.out.println(sort_allkey);
+
+            /*for(String v : entry.getKey().split("@"))
+            {
+                System.out.println(v);
+            }*/
+            //System.out.println(entry.getKey() + "::::" + entry.getValue());
         }
 
             //System.out.println(list_Data);
