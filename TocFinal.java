@@ -10,15 +10,15 @@ import java.lang.System.*;
 
 public class TocFinal
 {
-    public static String read() throws IOException 
+    public static String read(String urlStr) throws IOException 
     {  
-        //URL url = new URL(urlStr);
-        //URLConnection connection = url.openConnection();
-        //connection.setDoInput(true);
-        //InputStream inStream = connection.getInputStream();
+        URL url = new URL(urlStr);
+        URLConnection connection = url.openConnection();
+        connection.setDoInput(true);
+        InputStream inStream = connection.getInputStream();
         
-        //BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
-        BufferedReader in = new BufferedReader(new FileReader("5386c065e7259bb37d9270e5"));
+        BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
+        //BufferedReader in = new BufferedReader(new FileReader("5386c065e7259bb37d9270e5"));
 
         String s;  
         StringBuilder sb = new StringBuilder();  
@@ -26,8 +26,8 @@ public class TocFinal
         while ((s = in.readLine()) != null)  
         {
             //URLEncoder.encode(s, "UTF-8");
-            //sb.append(s + "\n");
-            System.out.println(s);
+            sb.append(s);
+            //System.out.println(s);
         }
 
         in.close();  
@@ -40,14 +40,7 @@ public class TocFinal
         //int com = 2;
         Map<String, Integer> pair = new HashMap<String, Integer>();
 
-        //String text = new String(Files.readAllBytes(Paths.get("5386c065e7259bb37d9270e5")), StandardCharsets.UTF_8);
-
-        URL url = new URL("http://www.datagarage.io/api/5386c065e7259bb37d9270e5");
-        URLConnection connection = url.openConnection();
-        connection.setDoInput(true);
-        InputStream inStream = connection.getInputStream();
-        
-        //BufferedReader in = new BufferedReader(new InputStreamReader(inStream));
+        String text = read("http://www.datagarage.io/api/5386c065e7259bb37d9270e5");
 
         JSONArray ary = new JSONArray(text);
 
@@ -257,6 +250,7 @@ public class TocFinal
 
         int i = 0, index;
         String sort_allkey;
+        FileWriter fw = new FileWriter("output.txt");
         for (Map.Entry<String, Integer> entry : list_Data) 
         {
             if (i++ == 3) break;
@@ -280,14 +274,12 @@ public class TocFinal
             }
 
             sort_allkey = sort_allkey.substring(0, sort_allkey.length()-1) + ";" + entry.getValue();
-            System.out.println(sort_allkey);
-
-            /*for(String v : entry.getKey().split("@"))
-            {
-                System.out.println(v);
-            }*/
-            //System.out.println(entry.getKey() + "::::" + entry.getValue());
+            //System.out.println(sort_allkey);
+            fw.write(sort_allkey + '\n');
         }
+
+        fw.flush();
+        fw.close();
 
             //System.out.println(list_Data);
 
