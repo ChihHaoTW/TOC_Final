@@ -25,7 +25,7 @@ jar: classes
 	$(JAR) $(MAIN).jar $(MF_FILE) *.class
 
 build:
-	ant -buildfile /home/TOC/ANT/toc3/build.xml build -Darg $(SCHNUM)
+	ant -buildfile /home/TOC/ANT/final/build.xml build -Darg $(SCHNUM)
 
 clean:
 	$(RM) *.class
